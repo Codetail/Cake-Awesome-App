@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "881566552123",
+    "firebase_url": "https://uzcustomcakes.firebaseio.com",
+    "project_id": "uzcustomcakes",
+    "storage_bucket": "uzcustomcakes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881566552123:android:9272c9c77b3f5909",
+        "android_client_info": {
+          "package_name": "com.uzcustomcake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881566552123-kfii2g88vfrncul6da4pvklnln2m7grc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uzcustomcake",
+            "certificate_hash": "96266bbb6447e92051758d0af0e185069b6acdac"
+          }
+        },
+        {
+          "client_id": "881566552123-j60369bc0njasbes8tddvsgefke8ma3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsKEaMYZ0BMzGNH1Kj7JEY9TXlei9zmtY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881566552123-j60369bc0njasbes8tddvsgefke8ma3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
