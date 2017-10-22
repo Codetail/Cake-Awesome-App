@@ -3,11 +3,14 @@ package com.uzcustomcake.core.models;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+
+import com.google.firebase.database.DataSnapshot;
 import com.uzcustomcake.core.CoreApplication;
 import com.uzcustomcake.core.domain.Bakery;
 import com.uzcustomcake.core.domain.Filling;
 import com.uzcustomcake.core.service.FillingsService;
 import java.util.List;
+import java.util.Map;
 
 /**
  * created at 10/13/17
@@ -26,8 +29,8 @@ public class FillingProductsViewModel extends AndroidViewModel implements Fillin
   }
 
   @Override
-  public LiveData<List<Filling>> getFillingsByProduct(Bakery product, String type) {
+  public LiveData<Map<String, List<Filling>>> getFillingsByProduct(Bakery product, String type) {
     return this.<CoreApplication>getApplication().firebaseService()
-        .getFillingsByProduct(product, type);
+            .getFillingsByProduct(product, type);
   }
 }

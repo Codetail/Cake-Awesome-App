@@ -16,6 +16,7 @@ public class Filling implements Parcelable {
   private final String imageUrl;
   private final double price;
   private final String type;
+  private boolean isSelected;
 
   public Filling(String type, String name, String description, String imageUrl, double price) {
     this.name = name;
@@ -59,6 +60,14 @@ public class Filling implements Parcelable {
 
   public double price() {
     return price;
+  }
+
+  public void setSelected(boolean isSelected){
+    this.isSelected = isSelected;
+  }
+
+  public boolean isSelected(){
+    return isSelected;
   }
 
   public String type() {

@@ -24,8 +24,8 @@ public class FillingList extends ArrayList<Filling> {
     return new Filling(
         type,
         (String) child.child("name").getValue(),
-        (String) child.child("description").getValue(),
-        (String) child.child("description").getValue(),
+        null,
+        (String) child.child("imageUrl").getValue(),
         (long) child.child("price").getValue()
     );
   }

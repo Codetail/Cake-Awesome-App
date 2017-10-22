@@ -8,6 +8,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+
 import com.google.firebase.database.DatabaseError;
 import com.uzcustomcake.core.CoreApplication;
 import com.uzcustomcake.core.models.BakeryProductsViewModel;
@@ -26,6 +29,7 @@ import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 public class MainActivity extends AppCompatActivity {
 
   private BakeryProductsViewModel productsViewModel;
+  public ImageView busket;
 
   private final Observer<DatabaseError> errorObserver = new Observer<DatabaseError>() {
     @Override public void onChanged(@Nullable DatabaseError databaseError) {
@@ -48,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
     productsViewModel = ViewModelProviders.of(this).get(BakeryProductsViewModel.class);
 
+    busket = findViewById(R.id.buscket);
+
     setContentView(R.layout.activity_main);
+    setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
     final ViewPager productsViewPager = findViewById(R.id.productsViewPager);
     productsViewPager.setAdapter(

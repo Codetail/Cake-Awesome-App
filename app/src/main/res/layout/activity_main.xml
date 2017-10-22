@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:background="@color/colorPrimary"
+      android:layout_width="match_parent"
+      android:layout_height="48dp">
+
+      <FrameLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+          <TextView
+              android:text="Choose fittings to make an order"
+              android:layout_gravity="left"
+              android:textSize="18sp"
+              android:gravity="center"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent" />
+
+          <ImageView
+              android:id="@+id/buscket"
+              android:layout_marginEnd="10dp"
+              android:layout_gravity="end|center"
+              android:src="@drawable/ic_add_shopping_cart_white_24dp"
+              android:layout_width="wrap_content"
+              android:background="?attr/selectableItemBackgroundBorderless"
+              android:clickable="true"
+              android:layout_height="wrap_content" />
+      </FrameLayout>
+  </android.support.v7.widget.Toolbar>
 
   <android.support.v4.view.ViewPager
       android:id="@+id/productsViewPager"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-    <android.support.v4.view.PagerTitleStrip
-        android:id="@+id/pagerTitleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+      <android.support.v4.view.PagerTitleStrip
+          android:id="@+id/pagerTitleView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          style="@style/viewPagerTitleStrip"
+          android:background="@drawable/bottom_shadow"
     />
 
   </android.support.v4.view.ViewPager>
 
-</FrameLayout>
+</LinearLayout>
