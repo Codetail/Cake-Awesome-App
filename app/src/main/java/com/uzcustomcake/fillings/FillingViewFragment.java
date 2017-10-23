@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.uzcustomcake.MainActivity;
+import com.uzcustomcake.OrderViewModel;
 import com.uzcustomcake.R;
 import com.uzcustomcake.core.domain.Bakery;
 import com.uzcustomcake.core.domain.Filling;
@@ -34,6 +37,8 @@ import java.util.Map;
 public class FillingViewFragment extends Fragment implements View.OnClickListener{
 
     String type;
+    OrderViewModel model;
+    private LinearLayout contentView;
 
     public static FillingViewFragment forType(Bakery product, String type) {
         final Bundle bundle = new Bundle();
@@ -44,9 +49,6 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    private LinearLayout contentView;
-    private FirebaseDatabaseService service;
 
     @Nullable
     @Override
@@ -62,6 +64,8 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
         contentView.setPadding(left, top, right, bottom);
         ScrollView scrollView = new ScrollView(inflater.getContext());
         scrollView.addView(contentView);
+
+        model = ((MainActivity) getActivity()).getModel();
         return scrollView;
     }
 

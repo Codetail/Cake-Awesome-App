@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   public LinearLayout bottomSheet;
   public FrameLayout flContent;
   BottomSheetBehavior bottomSheetBehavior;
+  private OrderViewModel model;
 
   private final Observer<DatabaseError> errorObserver = new Observer<DatabaseError>() {
     @Override public void onChanged(@Nullable DatabaseError databaseError) {
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    model = new OrderViewModel(getApplication());
 
     ((CoreApplication) getApplication()).liveDatabaseErrors()
         .observe(this, errorObserver);
@@ -127,6 +130,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   public void sendDataToServer(){
     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+  }
+
+  public OrderViewModel getModel(){
+    return model;
   }
 
   public void hideBottomSheet(){

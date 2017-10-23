@@ -18,6 +18,7 @@
 				android:layout_height="match_parent"/>
 
 		<ImageView
+				android:id="@+id/close"
 				android:background="?attr/selectableItemBackgroundBorderless"
 				android:src="@android:drawable/ic_menu_close_clear_cancel"
 				android:layout_width="wrap_content"
