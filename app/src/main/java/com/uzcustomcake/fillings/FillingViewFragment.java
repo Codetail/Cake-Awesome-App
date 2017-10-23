@@ -7,33 +7,21 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.uzcustomcake.R;
-import com.uzcustomcake.core.CoreApplication;
-import com.uzcustomcake.core.adapter.MultiViewAdapter;
 import com.uzcustomcake.core.domain.Bakery;
 import com.uzcustomcake.core.domain.Filling;
 import com.uzcustomcake.core.models.FillingProductsViewModel;
 import com.uzcustomcake.core.service.FirebaseDatabaseService;
 
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -44,6 +32,8 @@ import java.util.Map;
  */
 
 public class FillingViewFragment extends Fragment implements View.OnClickListener{
+
+    String type;
 
     public static FillingViewFragment forType(Bakery product, String type) {
         final Bundle bundle = new Bundle();
@@ -79,7 +69,7 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String type = getArguments().getString("type");
+        type = getArguments().getString("type");
         final Bakery product = getArguments().getParcelable("product");
 
         final FillingProductsViewModel model = ViewModelProviders.of(this)
@@ -102,24 +92,16 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
     private void addTitle(String title) {
         TextView titleView = new TextView(getContext());
         titleView.setTextColor(ContextCompat.getColor(getContext(), R.color.colorTitle));
-//        float scale = getResources().getDisplayMetrics().density;
-//        int left = (int) (16*scale + 0.5f);
-//        int top = (int) (10*scale + 0.5f);
-//        int right = (int) (16*scale + 0.5f);
-//        int bottom = (int) (10*scale + 0.5f);
-//        titleView.setPadding(40, 40, 40, 40);
         titleView.setText(title);
         contentView.addView(titleView);
     }
 
     private void addRecyclerView(FillingsAdapter adapter) {
-        SnapHelper snapHelper = new LinearSnapHelper();
         RecyclerView recyclerView = new RecyclerView(getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        snapHelper.attachToRecyclerView(recyclerView);
         contentView.addView(recyclerView);
     }
 

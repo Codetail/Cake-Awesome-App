@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+							android:orientation="vertical"
+							android:layout_width="match_parent"
+							android:layout_height="340dp">
+
+	<LinearLayout
+			android:padding="10dp"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		<TextView
+				android:gravity="left|center"
+				android:layout_weight="1"
+				android:text="Final step"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"/>
+
+		<ImageView
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:src="@android:drawable/ic_menu_close_clear_cancel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+	<android.support.design.widget.TextInputLayout
+			android:id="@+id/nameLayout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:paddingBottom="5dp">
+
+		<EditText
+				android:id="@+id/name"
+				android:textSize="16sp"
+				android:backgroundTint="#123"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="Your full name"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+			android:id="@+id/phoneLayout"
+			android:layout_width="match_parent"
+			android:layout_marginBottom="10dp"
+			android:layout_height="wrap_content"
+			android:paddingBottom="5dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+		<EditText
+				android:id="@+id/phone"
+				android:textSize="16sp"
+				android:backgroundTint="#123"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="Your phone number"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+			android:id="@+id/addresskLayout"
+			android:layout_width="match_parent"
+			android:layout_marginBottom="5dp"
+			android:paddingBottom="5dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+		<EditText
+				android:id="@+id/address"
+				android:textSize="16sp"
+				android:backgroundTint="#123"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="Your address"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		<FrameLayout
+				android:layout_weight="1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent">
+
+			<Button
+					android:id="@+id/order"
+					android:background="@color/order"
+					android:text="Order"
+					android:layout_gravity="center"
+					android:textColor="@android:color/white"
+					android:layout_margin="30dp"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+		</FrameLayout>
+
+		<ImageView
+				android:layout_weight="1"
+				android:src="@drawable/car"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+</LinearLayout>

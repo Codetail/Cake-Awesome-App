@@ -45,10 +45,14 @@ public class FillingsAdapter extends RecyclerView.Adapter<FillingsAdapter.ViewHo
         String price = (int) filling.price() + " сум";
         holder.price.setText(price);
         holder.card.setTag(filling);
-        if(lastSelectedPosition == i){
+        if(lastSelectedPosition != i) {
             filling.setSelected(false);
+            holder.selectedView.setVisibility(View.GONE);
+        }else {
+            filling.setSelected(true);
+            holder.selectedView.setVisibility(View.VISIBLE);
         }
-        holder.selectedView.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -58,10 +62,13 @@ public class FillingsAdapter extends RecyclerView.Adapter<FillingsAdapter.ViewHo
 
     @Override
     public void onClick(View v, int position) {
-        notifyItemChanged(position);
-        if(lastSelectedPosition == position)
+        if(lastSelectedPosition == position) {
             items.get(position).setSelected(false);
-        items.get(position).setSelected(true);
+        }
+        else {
+            items.get(position).setSelected(true);
+            notifyItemChanged(lastSelectedPosition);
+        }
         lastSelectedPosition = position;
     }
 
