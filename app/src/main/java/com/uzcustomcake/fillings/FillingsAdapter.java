@@ -62,6 +62,7 @@ public class FillingsAdapter extends RecyclerView.Adapter<FillingsAdapter.ViewHo
 
     @Override
     public void onClick(View v, int position) {
+        onClickListener.onClick(v);
         if(lastSelectedPosition == position) {
             items.get(position).setSelected(false);
         }

@@ -2,8 +2,10 @@ package com.uzcustomcake;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
@@ -13,7 +15,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -43,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   public ImageView basket;
   public PriceFormatter priceFormatter;
   public LinearLayout bottomSheet;
-  public FrameLayout flContent;
   BottomSheetBehavior bottomSheetBehavior;
   private OrderViewModel model;
+  private View hider;
 
   private final Observer<DatabaseError> errorObserver = new Observer<DatabaseError>() {
     @Override public void onChanged(@Nullable DatabaseError databaseError) {
@@ -79,6 +83,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     basket = findViewById(R.id.bascket);
     basket.setOnClickListener(this);
     bottomSheet = findViewById(R.id.bottom_sheet);
+    hider = findViewById(R.id.hider);
+    hider.setVisibility(View.GONE);
+    hider.setOnTouchListener(new View.OnTouchListener() {
+      @Override
+      public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
+      }
+    });
 
     getPreOrderFragment();
 
@@ -90,10 +102,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
     bottomSheetBehavior.setHideable(true);
-    float scale = getResources().getDisplayMetrics().density;
-    int height = (int) (250*scale + 0.5f);
-    bottomSheetBehavior.setPeekHeight(height);
     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+      @Override
+      public void onStateChanged(@NonNull View v, int i) {
+        if (BottomSheetBehavior.STATE_DRAGGING == i) {
+
+        } else if (BottomSheetBehavior.STATE_COLLAPSED == i) {
+          hider.setVisibility(View.GONE);
+          isVisible = false;
+          View view = MainActivity.this.getCurrentFocus();
+          if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+          }
+        }else if(BottomSheetBehavior.STATE_HIDDEN == i){
+          hider.setVisibility(View.GONE);
+          isVisible = false;
+          View view = MainActivity.this.getCurrentFocus();
+          if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+          }
+        }
+      }
+
+      @Override
+      public void onSlide(@NonNull View view, float v) {
+
+      }
+    });
   }
 
   public void getPreOrderFragment(){
@@ -108,20 +146,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   @Override
   public void onClick(View view) {
-    if(!isVisible) {
-      getPreOrderFragment();
-      bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-      isVisible = true;
+    if(model.isEmpty()) {
+      if (!isVisible) {
+        hider.setVisibility(View.VISIBLE);
+        getPreOrderFragment();
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        isVisible = true;
+      } else {
+        isVisible = false;
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        hider.setVisibility(View.GONE);
+      }
     }else {
-      isVisible = false;
-      bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+      Snackbar.make(this.getCurrentFocus(), "Choose at least one fitting to get an order", LENGTH_SHORT).show();
     }
   }
 
   public void finilizeOrderProcess(){
-    float scale = getResources().getDisplayMetrics().density;
-    int height = (int) (340*scale + 0.5f);
-    bottomSheetBehavior.setPeekHeight(height);
     getSupportFragmentManager()
         .beginTransaction()
         .replace(R.id.flContent, new OrderFragment())
@@ -130,6 +171,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   public void sendDataToServer(){
     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    hider.setVisibility(View.GONE);
+
+    model.sendOrdersToServer();
+    model.clear();
+    recreate();
   }
 
   public OrderViewModel getModel(){
@@ -138,5 +184,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   public void hideBottomSheet(){
     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    hider.setVisibility(View.GONE);
   }
 }

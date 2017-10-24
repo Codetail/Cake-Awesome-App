@@ -3,14 +3,12 @@ package com.uzcustomcake.core.service;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
-import com.uzcustomcake.core.domain.Bakery;
-import com.uzcustomcake.core.domain.BakeryList;
-import com.uzcustomcake.core.domain.Filling;
-import com.uzcustomcake.core.domain.FillingList;
+import com.uzcustomcake.core.domain.*;
 import com.uzcustomcake.core.service.DatabaseReferenceLiveData.DataSnapshotConverter;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,7 +22,7 @@ import java.util.Map;
  * @version 1.0
  */
 
-public class FirebaseDatabaseService implements FillingsService, ProductService {
+public class FirebaseDatabaseService implements FillingsService, ProductService, OrderService {
 
     private final static GenericTypeIndicator<List<Filling>> GENERIC_FILLINGS =
             new GenericTypeIndicator<>();
@@ -114,5 +112,10 @@ public class FirebaseDatabaseService implements FillingsService, ProductService 
                     }
                 }
         );
+    }
+
+    @Override
+    public void setOrder(Map<String, List<Order>> orders) {
+        rootReference.child("orders").setValue(orders);
     }
 }

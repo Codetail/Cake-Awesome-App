@@ -7,29 +7,12 @@ import android.os.Parcelable;
  * Created by sher on 10/23/17.
  */
 
-public class Order implements Parcelable {
+public class Order {
 
-    protected Order(Parcel in) {
-    }
-
-    public static final Creator<Order> CREATOR = new Creator<Order>() {
-        @Override
-        public Order createFromParcel(Parcel in) {
-            return new Order(in);
-        }
-
-        @Override
-        public Order[] newArray(int size) {
-            return new Order[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public String name;
+    public String adding = "";
+    public String address;
+    public String cake_type;
+    public int price;
+    public String deliver_time;
 }

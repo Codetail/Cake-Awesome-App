@@ -43,20 +43,34 @@
       </FrameLayout>
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/productsViewPager"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <android.support.v4.view.PagerTitleStrip
-          android:id="@+id/pagerTitleView"
+      <android.support.v4.view.ViewPager
+          android:id="@+id/productsViewPager"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          style="@style/viewPagerTitleStrip"
-          android:background="@drawable/bottom_shadow"
-      />
+          android:layout_height="wrap_content">
 
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pagerTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/viewPagerTitleStrip"
+            android:background="@drawable/bottom_shadow"
+        />
+
+      </android.support.v4.view.ViewPager>
+
+      <View
+          android:id="@+id/hider"
+          android:background="@android:color/black"
+          android:alpha="0.6"
+          android:visibility="gone"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+    </FrameLayout>
   </LinearLayout>
 
   <LinearLayout

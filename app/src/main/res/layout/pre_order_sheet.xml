@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 							android:orientation="vertical"
 							android:id="@+id/flContent"
 							android:layout_width="match_parent"
 							android:layout_height="340dp">
+
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
 	<LinearLayout
 			android:padding="10dp"
@@ -14,6 +19,7 @@
 		<TextView
 				android:gravity="left|center"
 				android:layout_weight="1"
+				android:textSize="16sp"
 				android:text="This is what you will get:"
 				android:textColor="@color/colorTitle"
 				android:layout_width="wrap_content"
@@ -28,34 +34,47 @@
 
 	</LinearLayout>
 
-	<android.support.v7.widget.RecyclerView
-			android:id="@+id/items"
-			android:layout_width="match_parent"
-			android:layout_marginRight="50dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginBottom="10dp"
-			android:layout_height="wrap_content"/>
-
-	<View
-			android:background="@color/colorTitle"
-			android:layout_marginRight="50dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginBottom="10dp"
-			android:layout_width="match_parent"
-			android:layout_height="0.5dp"/>
-
-	<TextView
-			android:text="234.800 сум"
-			android:gravity="end"
-			android:layout_marginRight="60dp"
-			android:id="@+id/totalPrice"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
+	</LinearLayout>
 
 	<LinearLayout
+			android:layout_gravity="center"
+			android:orientation="vertical"
 			android:layout_width="match_parent"
+			android:paddingBottom="80dp"
 			android:layout_height="wrap_content">
+
+		<android.support.v7.widget.RecyclerView
+				android:id="@+id/items"
+				android:layout_width="match_parent"
+				android:layout_marginRight="50dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginTop="30dp"
+				android:layout_marginBottom="10dp"
+				android:layout_height="wrap_content"/>
+
+		<View
+				android:background="@color/colorTitle"
+				android:layout_marginRight="50dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginBottom="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="0.5dp"/>
+
+		<TextView
+				android:text="234.800 сум"
+				android:gravity="end"
+				android:layout_marginRight="50dp"
+				android:id="@+id/totalPrice"
+				android:textColor="@color/colorTitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_gravity="bottom"
+			android:layout_width="match_parent"
+			android:layout_height="80dp">
 
 		<FrameLayout
 				android:layout_weight="1"
@@ -82,4 +101,4 @@
 
 	</LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
     String type;
     OrderViewModel model;
     private LinearLayout contentView;
+    List<Pair<String, Filling>> map;
 
     public static FillingViewFragment forType(Bakery product, String type) {
         final Bundle bundle = new Bundle();
@@ -66,6 +68,7 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
         scrollView.addView(contentView);
 
         model = ((MainActivity) getActivity()).getModel();
+        map = model.getNewMap();
         return scrollView;
     }
 
@@ -112,6 +115,7 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         Filling filling = (Filling) v.getTag();
+        map.add(new Pair<>(type, filling));
     }
 
 /*    static class FillingsAdapter extends MultiViewAdapter<Filling> {
