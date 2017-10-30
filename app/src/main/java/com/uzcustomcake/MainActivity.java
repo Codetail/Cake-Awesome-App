@@ -3,34 +3,27 @@ package com.uzcustomcake;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import android.widget.LinearLayout;
 import com.google.firebase.database.DatabaseError;
 import com.uzcustomcake.core.CoreApplication;
 import com.uzcustomcake.core.models.BakeryProductsViewModel;
 import com.uzcustomcake.fillings.SelectFillingsAdapter;
 import com.uzcustomcake.order.OrderFragment;
+import com.uzcustomcake.order.OrderViewModel;
 import com.uzcustomcake.order.PreOrderFragment;
-
-import java.util.List;
-import java.util.Locale;
 
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 
@@ -45,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
   private BakeryProductsViewModel productsViewModel;
   public ImageView basket;
-  public PriceFormatter priceFormatter;
   public LinearLayout bottomSheet;
   BottomSheetBehavior bottomSheetBehavior;
   private OrderViewModel model;
@@ -72,11 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ((CoreApplication) getApplication()).liveDatabaseErrors()
         .observe(this, errorObserver);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-      priceFormatter = new PriceFormatter(getResources().getConfiguration().getLocales().get(0));
-    }else {
-      priceFormatter = new PriceFormatter(getResources().getConfiguration().locale);
-    }
 
     productsViewModel = ViewModelProviders.of(this).get(BakeryProductsViewModel.class);
 

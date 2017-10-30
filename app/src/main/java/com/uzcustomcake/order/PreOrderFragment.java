@@ -12,11 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.uzcustomcake.MainActivity;
-import com.uzcustomcake.OrderViewModel;
 import com.uzcustomcake.R;
-import com.uzcustomcake.core.domain.Filling;
-import com.uzcustomcake.core.domain.Order;
-import org.w3c.dom.Text;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.uzcustomcake;
+package com.uzcustomcake.order;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

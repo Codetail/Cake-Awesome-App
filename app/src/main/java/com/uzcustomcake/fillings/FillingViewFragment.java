@@ -18,12 +18,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.uzcustomcake.MainActivity;
-import com.uzcustomcake.OrderViewModel;
+import com.uzcustomcake.order.OrderViewModel;
 import com.uzcustomcake.R;
 import com.uzcustomcake.core.domain.Bakery;
 import com.uzcustomcake.core.domain.Filling;
 import com.uzcustomcake.core.models.FillingProductsViewModel;
-import com.uzcustomcake.core.service.FirebaseDatabaseService;
 
 import java.util.List;
 import java.util.Map;
