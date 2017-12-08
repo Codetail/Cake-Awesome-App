@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Custom Cake</string>
+  <string name="notifier">Kamida bitta to\'ldiruvchini tanlang</string>
+  <string name="choose_fitting">To\'ldiriqlarni tanlang</string>
+  <string name="final_step">Yakuniy qadam</string>
+  <string name="full_name">To\'liq ismingiz</string>
+  <string name="phone_number">Sizning telefon raqamingiz</string>
+  <string name="address">Sizning manzilingiz</string>
+  <string name="deliver_date">Etkazib berish sanasi</string>
+  <string name="order">Buyurtma berish</string>
+  <string name="what_you_will_get">Xaridlaringiz ro\'yxati:</string>
+  <string name="order_deliver">Buyurtma &amp; Taqdim</string>
+  <string name="choose_lang">Tilni tanglang:</string>
+</resources>

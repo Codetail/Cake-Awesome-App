@@ -19,7 +19,16 @@ import com.uzcustomcake.core.service.FirebaseDatabaseService;
 public class CoreApplication extends Application {
 
   private FirebaseDatabaseService firebaseService;
+  private String language = "US";
   private MutableLiveData<DatabaseError> liveDatabaseErrors;
+
+  public String getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(String language) {
+    this.language = language;
+  }
 
   @Override public void onCreate() {
     super.onCreate();

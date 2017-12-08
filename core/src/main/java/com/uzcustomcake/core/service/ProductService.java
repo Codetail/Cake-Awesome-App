@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ProductService {
 
-  LiveData<List<String>> getTypes();
+  LiveData<List<String>> getTypes(String language);
 
-  LiveData<List<Bakery>> getProducts(String type);
+  LiveData<List<Bakery>> getProducts(String type, String language);
 }

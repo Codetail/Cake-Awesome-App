@@ -3,18 +3,24 @@ package com.uzcustomcake;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +30,7 @@ import com.uzcustomcake.fillings.SelectFillingsAdapter;
 import com.uzcustomcake.order.OrderFragment;
 import com.uzcustomcake.order.OrderViewModel;
 import com.uzcustomcake.order.PreOrderFragment;
+import java.util.Locale;
 
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   BottomSheetBehavior bottomSheetBehavior;
   private OrderViewModel model;
   private View hider;
+  private ViewPager productsViewPager;
 
   private final Observer<DatabaseError> errorObserver = new Observer<DatabaseError>() {
     @Override public void onChanged(@Nullable DatabaseError databaseError) {
@@ -83,9 +91,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-    final ViewPager productsViewPager = findViewById(R.id.productsViewPager);
+    productsViewPager = findViewById(R.id.productsViewPager);
     productsViewPager.setAdapter(
-        new SelectFillingsAdapter(getSupportFragmentManager(), this, productsViewModel));
+        new SelectFillingsAdapter(getSupportFragmentManager(), this, productsViewModel,
+            ((CoreApplication) getApplication()).getLanguage()));
+
+    productsViewPager.setOffscreenPageLimit(3);
 
     bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
     bottomSheetBehavior.setHideable(true);
@@ -145,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         hider.setVisibility(View.GONE);
       }
     }else {
-      Snackbar.make(this.getCurrentFocus(), "Choose at least one fitting to get an order", LENGTH_SHORT).show();
+      Snackbar.make(this.getCurrentFocus(), R.string.notifier, LENGTH_SHORT).show();
     }
   }
 
@@ -172,5 +183,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   public void hideBottomSheet(){
     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     hider.setVisibility(View.GONE);
+  }
+
+  public void changeLanguage(View view){
+    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+        android.R.layout.select_dialog_singlechoice);
+    arrayAdapter.add("English");
+    arrayAdapter.add("Русский");
+    arrayAdapter.add("O'zbek tili");
+    AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+        .setTitle(R.string.choose_lang)
+        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        })
+        .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+          @Override public void onClick(DialogInterface dialog, int which) {
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            android.content.res.Configuration conf = res.getConfiguration();
+            if(which == 0){
+              conf.setLocale(new Locale("US"));
+              ((CoreApplication)getApplication()).setLanguage("US");
+            }else if(which == 1){
+              conf.setLocale(new Locale("RU"));
+              ((CoreApplication)getApplication()).setLanguage("RU");
+            }else if(which == 2){
+              conf.setLocale(new Locale("UZ"));
+              ((CoreApplication)getApplication()).setLanguage("UZ");
+            }
+            res.updateConfiguration(conf, dm);
+            recreate();
+          }
+        })
+        .create();
+
+    dialog.show();
   }
 }

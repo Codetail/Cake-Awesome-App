@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.uzcustomcake.MainActivity;
+import com.uzcustomcake.core.CoreApplication;
 import com.uzcustomcake.order.OrderViewModel;
 import com.uzcustomcake.R;
 import com.uzcustomcake.core.domain.Bakery;
@@ -80,7 +81,8 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
 
         final FillingProductsViewModel model = ViewModelProviders.of(this)
             .get(FillingProductsViewModel.class);
-        LiveData<Map<String, List<Filling>>> data = model.getFillingsByProduct(product, type);
+        LiveData<Map<String, List<Filling>>> data = model.getFillingsByProduct(
+            ((CoreApplication) getActivity().getApplication()).getLanguage(), product, type);
         data.observe(this, new Observer<Map<String, List<Filling>>>() {
             @Override
             public void onChanged(@Nullable Map<String, List<Filling>> map) {

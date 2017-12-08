@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Custom Cake</string>
+  <string name="notifier">Выберите как минимум один наполнитель</string>
+  <string name="choose_fitting">Выберите наполнители</string>
+  <string name="final_step">Финальный шаг</string>
+  <string name="full_name">Ваше полное имя</string>
+  <string name="phone_number">Ваш номер телефона</string>
+  <string name="address">Ваш адресс</string>
+  <string name="deliver_date">Дата доставки</string>
+  <string name="order">Заказать</string>
+  <string name="what_you_will_get">Список ваших покупок:</string>
+  <string name="order_deliver">Заказать &amp; Доставить</string>
+  <string name="choose_lang">Выберите язык:</string>
+</resources>

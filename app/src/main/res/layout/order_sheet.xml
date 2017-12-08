@@ -16,7 +16,7 @@
 				android:layout_weight="1"
 				android:textColor="@color/colorTitle"
 				android:textSize="16dp"
-				android:text="Final step"
+				android:text="@string/final_step"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"/>
 
@@ -43,7 +43,7 @@
 				android:backgroundTint="#123"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="Your full name"/>
+				android:hint="@string/full_name"/>
 	</android.support.design.widget.TextInputLayout>
 
 	<android.support.design.widget.TextInputLayout
@@ -63,7 +63,7 @@
 				android:inputType="number"
 				android:maxLength="12"
 				android:layout_height="wrap_content"
-				android:hint="Your phone number"/>
+				android:hint="@string/phone_number"/>
 	</android.support.design.widget.TextInputLayout>
 
 	<android.support.design.widget.TextInputLayout
@@ -79,7 +79,7 @@
 				android:backgroundTint="#123"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="Your address"/>
+				android:hint="@string/address"/>
 	</android.support.design.widget.TextInputLayout>
 
 	<android.support.design.widget.TextInputLayout
@@ -96,7 +96,7 @@
 				android:backgroundTint="#123"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:hint="Deliver date(YYYY-MM-DD HH:MM:SS)"/>
+				android:hint="@string/deliver_date"/>
 	</android.support.design.widget.TextInputLayout>
 
 	<LinearLayout
@@ -111,7 +111,7 @@
 			<Button
 					android:id="@+id/order"
 					android:background="@color/order"
-					android:text="Order"
+					android:text="@string/order"
 					android:layout_gravity="center"
 					android:textColor="@android:color/white"
 					android:layout_margin="20dp"

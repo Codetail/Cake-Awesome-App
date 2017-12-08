@@ -27,14 +27,15 @@ public class SelectFillingsAdapter extends FragmentStatePagerAdapter {
   private final ArrayMap<String, Bakery> bakeryMap = new ArrayMap<>();
 
   public SelectFillingsAdapter(@NonNull FragmentManager fm, LifecycleOwner host,
-      final BakeryProductsViewModel viewModel) {
+      final BakeryProductsViewModel viewModel, String lang) {
     super(fm);
-    viewModel.getProductsByTypesMap().observe(host, new Observer<Map<String, Bakery>>() {
+    viewModel.getProductsByTypesMap(lang).observe(host, new Observer<Map<String, Bakery>>() {
       @Override public void onChanged(@Nullable Map<String, Bakery> newData) {
         if (newData == null) {
           newData = Collections.emptyMap();
         }
 
+        bakeryMap.clear();
         bakeryMap.putAll(newData);
         notifyDataSetChanged();
       }

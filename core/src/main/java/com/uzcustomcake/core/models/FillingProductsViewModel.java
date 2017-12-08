@@ -29,8 +29,8 @@ public class FillingProductsViewModel extends AndroidViewModel implements Fillin
   }
 
   @Override
-  public LiveData<Map<String, List<Filling>>> getFillingsByProduct(Bakery product, String type) {
+  public LiveData<Map<String, List<Filling>>> getFillingsByProduct(String lang, Bakery product, String type) {
     return this.<CoreApplication>getApplication().firebaseService()
-            .getFillingsByProduct(product, type);
+            .getFillingsByProduct(lang, product, type);
   }
 }

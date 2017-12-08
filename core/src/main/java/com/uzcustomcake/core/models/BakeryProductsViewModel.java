@@ -21,15 +21,15 @@ public class BakeryProductsViewModel extends AndroidViewModel implements Product
     super(application);
   }
 
-  public LiveData<List<String>> getTypes() {
-    return this.<CoreApplication>getApplication().firebaseService().getTypes();
+  public LiveData<List<String>> getTypes(String lang) {
+    return this.<CoreApplication>getApplication().firebaseService().getTypes(lang);
   }
 
-  public LiveData<Map<String, Bakery>> getProductsByTypesMap() {
-    return this.<CoreApplication>getApplication().firebaseService().getProductsByTypeMap();
+  public LiveData<Map<String, Bakery>> getProductsByTypesMap(String lang) {
+    return this.<CoreApplication>getApplication().firebaseService().getProductsByTypeMap(lang);
   }
 
-  @Override public LiveData<List<Bakery>> getProducts(String type) {
-    return this.<CoreApplication>getApplication().firebaseService().getProducts(type);
+  @Override public LiveData<List<Bakery>> getProducts(String type, String lang) {
+    return this.<CoreApplication>getApplication().firebaseService().getProducts(type, lang);
   }
 }

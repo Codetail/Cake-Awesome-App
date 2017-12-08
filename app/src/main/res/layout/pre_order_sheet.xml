@@ -20,7 +20,7 @@
 				android:gravity="left|center"
 				android:layout_weight="1"
 				android:textSize="16sp"
-				android:text="This is what you will get:"
+				android:text="@string/what_you_will_get"
 				android:textColor="@color/colorTitle"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"/>
@@ -84,7 +84,7 @@
 			<Button
 					android:id="@+id/order"
 					android:background="@color/order"
-					android:text="Order &amp; Deliver"
+					android:text="@string/order_deliver"
 					android:layout_gravity="center"
 					android:textColor="@android:color/white"
 					android:layout_margin="20dp"

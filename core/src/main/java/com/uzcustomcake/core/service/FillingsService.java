@@ -19,5 +19,5 @@ public interface FillingsService {
 
   LiveData<List<String>> getFillingsTypesByProduct(Bakery product);
 
-  LiveData<Map<String, List<Filling>>> getFillingsByProduct(Bakery product, String type);
+  LiveData<Map<String, List<Filling>>> getFillingsByProduct(String language, Bakery product, String type);
 }
