@@ -59,6 +59,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "881566552123-9n6o6h9nphmqcjpe11bnv0gkrleavhiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.horlock.cakeadminapp",
+            "certificate_hash": "ed409cc7aebc28d830b14e035e8215b47905d3e7"
+          }
+        },
+        {
           "client_id": "881566552123-j60369bc0njasbes8tddvsgefke8ma3j.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -73,8 +81,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881566552123-j60369bc0njasbes8tddvsgefke8ma3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

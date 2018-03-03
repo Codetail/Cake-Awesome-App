@@ -19,12 +19,12 @@ import java.util.Map;
 /**
  * created at 10/1/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 
 public class SelectFillingsAdapter extends FragmentStatePagerAdapter {
-  private final ArrayMap<String, Bakery> bakeryMap = new ArrayMap<>();
+  private ArrayMap<String, Bakery> bakeryMap = new ArrayMap<>();
 
   public SelectFillingsAdapter(@NonNull FragmentManager fm, LifecycleOwner host,
       final BakeryProductsViewModel viewModel, String lang) {
@@ -35,7 +35,7 @@ public class SelectFillingsAdapter extends FragmentStatePagerAdapter {
           newData = Collections.emptyMap();
         }
 
-        bakeryMap.clear();
+        bakeryMap = new ArrayMap<>();
         bakeryMap.putAll(newData);
         notifyDataSetChanged();
       }

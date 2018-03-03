@@ -133,6 +133,30 @@
           android:orientation="horizontal"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+      >
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="Amount: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+
+        <TextView
+            android:id="@+id/amount"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:text=" 5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+      </LinearLayout>
+
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
           >
         <TextView
             android:textStyle="bold"
@@ -152,6 +176,38 @@
             android:layout_height="wrap_content"
             />
       </LinearLayout>
+
+      <View
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginRight="16dp"
+          android:background="#3333"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"/>
+
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+      >
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="Comment: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+
+        <TextView
+            android:id="@+id/comment"
+            android:textSize="16sp"
+            android:text="Need smth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        />
+      </LinearLayout>
+
     </LinearLayout>
 
     <ImageButton

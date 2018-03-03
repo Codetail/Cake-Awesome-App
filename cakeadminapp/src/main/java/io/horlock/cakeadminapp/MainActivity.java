@@ -1,8 +1,10 @@
 package io.horlock.cakeadminapp;
 
+import android.app.NotificationManager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.messaging.FirebaseMessaging;
 import io.horlock.cakeadminapp.domain.Order;
 import io.horlock.cakeadminapp.models.OrderViewModel;
 import java.text.SimpleDateFormat;
@@ -48,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    String ns = Context.NOTIFICATION_SERVICE;
+    NotificationManager nMgr = (NotificationManager) this.getSystemService(ns);
+    nMgr.cancelAll();
+
+    FirebaseMessaging.getInstance().subscribeToTopic("orders");
 
     calendarView = findViewById(R.id.compactcalendar_view);
     rvItems = findViewById(R.id.rvItems);

@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * created at 9/30/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 public class Filling implements Parcelable {

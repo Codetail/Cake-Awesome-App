@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Custom Cake</string>
+  <string name="app_name">Sits\'weets</string>
   <string name="notifier">Выберите как минимум один наполнитель</string>
   <string name="choose_fitting">Выберите наполнители</string>
   <string name="final_step">Финальный шаг</string>
@@ -12,4 +12,5 @@
   <string name="what_you_will_get">Список ваших покупок:</string>
   <string name="order_deliver">Заказать &amp; Доставить</string>
   <string name="choose_lang">Выберите язык:</string>
+  <string name="comment">Комментарий</string>
 </resources>

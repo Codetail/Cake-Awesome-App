@@ -1,6 +1,7 @@
 package com.uzcustomcake.order;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -13,26 +14,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import com.uzcustomcake.MainActivity;
 import com.uzcustomcake.R;
+import com.uzcustomcake.core.CoreApplication;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog.OnTimeSetListener;
 import java.util.Calendar;
 
 /**
- * Created by horlock on 10/23/17.
+ * Created by 00003130 on 10/23/17.
  */
 
 public class OrderFragment extends Fragment implements DatePickerDialog.OnDateSetListener, OnTimeSetListener {
 
   Button order;
   ImageView close;
-  EditText name, phone, address, date;
+  EditText name, phone, address, date, comment;
   TextInputLayout nameLayout, phoneLayout, addressLayout, dateLayout;
   OrderViewModel model;
   Calendar now;
 
   @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.order_sheet, container, false);
     order = v.findViewById(R.id.order);
@@ -41,6 +43,7 @@ public class OrderFragment extends Fragment implements DatePickerDialog.OnDateSe
     phone = v.findViewById(R.id.phone);
     address = v.findViewById(R.id.address);
     date = v.findViewById(R.id.date);
+    comment = v.findViewById(R.id.comment);
     nameLayout = v.findViewById(R.id.nameLayout);
     phoneLayout = v.findViewById(R.id.phoneLayout);
     addressLayout = v.findViewById(R.id.addressLayout);
@@ -74,6 +77,11 @@ public class OrderFragment extends Fragment implements DatePickerDialog.OnDateSe
         }
       }
     });
+    date.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        createDialog();
+      }
+    });
   }
 
   private void createDialog() {
@@ -88,24 +96,58 @@ public class OrderFragment extends Fragment implements DatePickerDialog.OnDateSe
   }
 
   private boolean everyThingIsDone() {
-    if (name.getText().toString().isEmpty()) {
-      nameLayout.setError("Please enter your name");
-      return false;
-    } else if (phone.getText().toString().isEmpty()
-        && !phone.getText().toString().startsWith("998")
-        && phone.getText().toString().length() != 12) {
-      phoneLayout.setError("Please enter correct phone number");
-      return false;
-    } else if (address.getText().toString().isEmpty()) {
-      addressLayout.setError("Please enter your address");
-      return false;
-    } else if (date.getText().toString().isEmpty()) {
-      dateLayout.setError("Please enter deliver date by template e.g. 2017-10-24 15:00");
-      return false;
+    if(((CoreApplication) getActivity().getApplication()).getLanguage().equals("US")){
+      if (name.getText().toString().isEmpty()) {
+        nameLayout.setError("Please enter your name");
+        return false;
+      } else if (phone.getText().toString().isEmpty()
+          && !phone.getText().toString().startsWith("998")
+          && phone.getText().toString().length() != 12) {
+        phoneLayout.setError("Please enter correct phone number");
+        return false;
+      } else if (address.getText().toString().isEmpty()) {
+        addressLayout.setError("Please enter your address");
+        return false;
+      } else if (date.getText().toString().isEmpty()) {
+        dateLayout.setError("Please enter deliver date");
+        return false;
+      }
+    }else if(((CoreApplication) getActivity().getApplication()).getLanguage().equals("RU")){
+      if (name.getText().toString().isEmpty()) {
+        nameLayout.setError("Введите свое имя");
+        return false;
+      } else if (phone.getText().toString().isEmpty()
+          && !phone.getText().toString().startsWith("998")
+          && phone.getText().toString().length() != 12) {
+        phoneLayout.setError("Введите правильный номер телефона");
+        return false;
+      } else if (address.getText().toString().isEmpty()) {
+        addressLayout.setError("Введите корректный адрес");
+        return false;
+      } else if (date.getText().toString().isEmpty()) {
+        dateLayout.setError("Выберите дату доставки");
+        return false;
+      }else if(((CoreApplication) getActivity().getApplication()).getLanguage().equals("UZ")) {
+        if (name.getText().toString().isEmpty()) {
+          nameLayout.setError("Ismingizni kiriting");
+          return false;
+        } else if (phone.getText().toString().isEmpty()
+            && !phone.getText().toString().startsWith("998")
+            && phone.getText().toString().length() != 12) {
+          phoneLayout.setError("Telefon raqamingizni kiriting");
+          return false;
+        } else if (address.getText().toString().isEmpty()) {
+          addressLayout.setError("To'g'ri manzilni kiriting");
+          return false;
+        } else if (date.getText().toString().isEmpty()) {
+          dateLayout.setError("Yetkazib berish kunini tanlang");
+          return false;
+        }
+      }
     }
 
     model.saveUserData(name.getText().toString(), phone.getText().toString(),
-        address.getText().toString(), String.valueOf(now.getTimeInMillis()));
+        address.getText().toString(), String.valueOf(now.getTimeInMillis()), comment.getText().toString());
     return true;
   }
 

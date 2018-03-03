@@ -4,7 +4,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 /**
- * Created by horlock on 12/8/17.
+ * Created by 00003130 on 12/8/17.
  */
 
 public class OrderList extends ArrayList<Order> {
@@ -24,6 +24,8 @@ public class OrderList extends ArrayList<Order> {
         (String)child.child("address").getValue(),
         (String) child.child("cake_type").getValue(),
         (long) child.child("price").getValue(),
+        (String) child.child("comment").getValue(),
+        (long) child.child("amount").getValue(),
         (String) child.child("deliver_time").getValue(),
         (String) id
     );

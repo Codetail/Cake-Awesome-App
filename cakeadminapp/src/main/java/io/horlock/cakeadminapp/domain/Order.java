@@ -1,7 +1,7 @@
 package io.horlock.cakeadminapp.domain;
 
 /**
- * Created by sher on 10/23/17.
+ * Created by 00003130 on 10/23/17.
  */
 
 public class Order {
@@ -14,10 +14,12 @@ public class Order {
     public String deliver_time;
     public String phone;
     public String id;
+    public String comment;
+    public long amount;
     public int pos;
 
     public Order(String name, String adding, String address, String cake_type, long price,
-        String deliver_time, String id) {
+        String comment, long amount, String deliver_time, String id) {
         this.name = name;
         this.adding = adding;
         this.address = address;
@@ -25,5 +27,7 @@ public class Order {
         this.price = price;
         this.deliver_time = deliver_time;
         this.id = id;
+        this.comment = comment;
+        this.amount = amount;
     }
 }

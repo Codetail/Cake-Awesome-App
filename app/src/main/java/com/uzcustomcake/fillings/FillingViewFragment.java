@@ -87,10 +87,12 @@ public class FillingViewFragment extends Fragment implements View.OnClickListene
             @Override
             public void onChanged(@Nullable Map<String, List<Filling>> map) {
                 if(map != null) {
-                    for (String title : map.keySet()) {
-                        addTitle(title);
-                        addRecyclerView(new FillingsAdapter(map.get(title), FillingViewFragment.this));
-                    }
+                    if(contentView.getChildCount() > 0)
+                        contentView.removeAllViews();
+                        for (String title : map.keySet()) {
+                            addTitle(title);
+                            addRecyclerView(new FillingsAdapter(map.get(title), FillingViewFragment.this));
+                        }
                 }
             }
         });

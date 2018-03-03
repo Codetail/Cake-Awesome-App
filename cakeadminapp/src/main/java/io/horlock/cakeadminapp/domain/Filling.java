@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * created at 9/30/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 public class Filling implements Parcelable {
@@ -17,13 +17,18 @@ public class Filling implements Parcelable {
   private final double price;
   private final String type;
   private boolean isSelected;
+  private final String comment;
+  private final int amount;
 
-  public Filling(String type, String name, String description, String imageUrl, double price) {
+  public Filling(String type, String name, String description, String imageUrl, double price,
+      String comment, int amount) {
     this.name = name;
     this.description = description;
     this.imageUrl = imageUrl;
     this.price = price;
     this.type = type;
+    this.comment = comment;
+    this.amount = amount;
   }
 
   protected Filling(Parcel in) {
@@ -32,6 +37,8 @@ public class Filling implements Parcelable {
     imageUrl = in.readString();
     price = in.readDouble();
     type = in.readString();
+    comment = in.readString();
+    amount = in.readInt();
   }
 
   public static final Creator<Filling> CREATOR = new Creator<Filling>() {
@@ -72,6 +79,14 @@ public class Filling implements Parcelable {
 
   public String type() {
     return type;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public int getAmount() {
+    return amount;
   }
 
   @Override public int describeContents() {

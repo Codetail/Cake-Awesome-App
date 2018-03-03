@@ -2,16 +2,18 @@ package com.uzcustomcake;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +39,7 @@ import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 /**
  * created at 10/1/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 
@@ -92,11 +94,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
     productsViewPager = findViewById(R.id.productsViewPager);
+    productsViewPager.setOffscreenPageLimit(4);
     productsViewPager.setAdapter(
         new SelectFillingsAdapter(getSupportFragmentManager(), this, productsViewModel,
             ((CoreApplication) getApplication()).getLanguage()));
 
-    productsViewPager.setOffscreenPageLimit(3);
+    //productsViewPager.setOffscreenPageLimit(3);
 
     bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
     bottomSheetBehavior.setHideable(true);
@@ -152,11 +155,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isVisible = true;
       } else {
         isVisible = false;
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         hider.setVisibility(View.GONE);
       }
     }else {
-      Snackbar.make(this.getCurrentFocus(), R.string.notifier, LENGTH_SHORT).show();
+      Snackbar.make(this.getCurrentFocus(), R.string.notifier,
+          LENGTH_SHORT).show();
     }
   }
 
@@ -168,12 +172,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   }
 
   public void sendDataToServer(){
-    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     hider.setVisibility(View.GONE);
 
     model.sendOrdersToServer();
     model.clear();
+
+    startFriendlyActivity();
     recreate();
+  }
+
+  private void startFriendlyActivity(){
+    Intent launchIntent = new Intent(Intent.ACTION_SEND);
+    launchIntent.setComponent(new ComponentName("io.horlock.cakeadminapp",
+        "io.horlock.cakeadminapp.InvisibleActivity"));
+    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivityForResult(launchIntent, 999);
   }
 
   public OrderViewModel getModel(){
@@ -215,7 +229,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
               ((CoreApplication)getApplication()).setLanguage("UZ");
             }
             res.updateConfiguration(conf, dm);
-            recreate();
+            finish();
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
           }
         })
         .create();

@@ -13,7 +13,7 @@ import java.util.List;
 import org.w3c.dom.Text;
 
 /**
- * Created by horlock on 12/8/17.
+ * Created by 00003130 on 12/8/17.
  */
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
@@ -41,7 +41,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     calendar.setTimeInMillis(Long.parseLong(order.deliver_time));
     h.deliverDate.setText(new SimpleDateFormat("dd MMMM yyyy HH:mm").format(calendar.getTime()));
     h.phone.setText(order.phone);
-    h.price.setText(order.price + " сум");
+    h.price.setText(order.price * order.amount + " сум" + "(" + order.price + " * " + order.amount + ")");
+    h.amount.setText(String.valueOf(order.amount));
+    h.comment.setText(order.comment);
     h.delete.setTag(order);
     h.delete.setOnClickListener(onClickListener);
   }
@@ -52,7 +54,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
   static class ViewHolder extends RecyclerView.ViewHolder{
 
-    TextView name, cakeType, addings, address, deliverDate, phone, price;
+    TextView name, cakeType, addings, address, deliverDate, phone, price, comment, amount;
     ImageButton delete;
 
     public ViewHolder(View itemView) {
@@ -66,6 +68,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
       phone = itemView.findViewById(R.id.phone);
       price = itemView.findViewById(R.id.price);
       delete = itemView.findViewById(R.id.delete);
+      comment = itemView.findViewById(R.id.comment);
+      amount = itemView.findViewById(R.id.amount);
     }
   }
 }

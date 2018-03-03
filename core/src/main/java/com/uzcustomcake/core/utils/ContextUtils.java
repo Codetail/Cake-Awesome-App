@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 /**
  * created at 10/5/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 

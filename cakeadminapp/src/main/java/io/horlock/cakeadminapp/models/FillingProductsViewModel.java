@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * created at 10/13/17
  *
- * @author Ozodrukh
+ * @author 00003130
  * @version 1.0
  */
 public class FillingProductsViewModel extends AndroidViewModel implements FillingsService {

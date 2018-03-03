@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Custom Cake</string>
+  <string name="app_name">Sits\'weets</string>
   <string name="notifier">Kamida bitta to\'ldiruvchini tanlang</string>
   <string name="choose_fitting">To\'ldiriqlarni tanlang</string>
   <string name="final_step">Yakuniy qadam</string>
@@ -12,4 +12,5 @@
   <string name="what_you_will_get">Xaridlaringiz ro\'yxati:</string>
   <string name="order_deliver">Buyurtma &amp; Taqdim</string>
   <string name="choose_lang">Tilni tanglang:</string>
+  <string name="comment">Sharh</string>
 </resources>

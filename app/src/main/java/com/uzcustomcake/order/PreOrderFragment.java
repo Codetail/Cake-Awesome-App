@@ -1,5 +1,9 @@
 package com.uzcustomcake.order;
 
+import android.app.AlertDialog;
+import android.arch.lifecycle.*;
+import android.arch.lifecycle.Observer;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.uzcustomcake.MainActivity;
@@ -17,7 +22,7 @@ import com.uzcustomcake.R;
 import java.util.*;
 
 /**
- * Created by horlock on 10/23/17.
+ * Created by 00003130 on 10/23/17.
  */
 
 public class PreOrderFragment extends Fragment {
@@ -61,7 +66,11 @@ public class PreOrderFragment extends Fragment {
       }
     });
 
-    totalPrice.setText(model.getTotalCount());
+    model.observeTotalCount().observe(this, new Observer<String>() {
+      @Override public void onChanged(@Nullable String s) {
+        totalPrice.setText(s);
+      }
+    });
   }
 
   public void populateList(){
@@ -72,26 +81,29 @@ public class PreOrderFragment extends Fragment {
 //        it.remove();
 //      }
 //    }
-    items.setAdapter(new PreOrderAdapter(model.getFilteredList()));
+    items.setAdapter(new PreOrderAdapter(model));
   }
 
   static class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.ViewHolder>{
 
-    protected final List<PreOrderItem> items;
+    private final List<PreOrderItem> items;
+    private final OrderViewModel model;
 
-    public PreOrderAdapter(List<PreOrderItem> items) {
-      this.items = items;
+    public PreOrderAdapter(OrderViewModel model) {
+      this.model = model;
+      this.items = model.getFilteredList();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-      return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pre_order_item, viewGroup, false));
+      return new ViewHolder(model, LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pre_order_item, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
       holder.name.setText(items.get(i).name);
-      holder.price.setText(items.get(i).price);
+      holder.price.setText(items.get(i).priceTitle);
+      holder.amount.setText(items.get(i).amount);
     }
 
     @Override
@@ -101,13 +113,46 @@ public class PreOrderFragment extends Fragment {
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
-      TextView name, price;
+      TextView name, price, amount;
 
-      public ViewHolder(View itemView) {
+      public ViewHolder(final OrderViewModel model, final View itemView) {
         super(itemView);
 
         name = itemView.findViewById(R.id.name);
         price = itemView.findViewById(R.id.price);
+        amount = itemView.findViewById(R.id.amount);
+        amount.setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View v) {
+            final View view = LayoutInflater.from(itemView.getContext()).inflate(R.layout.choose_amount_fragment, null);
+            final EditText customAmount = view.findViewById(R.id.amount);
+            customAmount.setText(model.getAmount(getLayoutPosition()));
+
+            view.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
+              @Override public void onClick(View v) {
+                customAmount.setText(String.valueOf(Integer.valueOf(customAmount.getText().toString()) + 1));
+              }
+            });
+            view.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener() {
+              @Override public void onClick(View v) {
+                if(!customAmount.getText().toString().equals("1"))
+                  customAmount.setText(String.valueOf(Integer.valueOf(customAmount.getText().toString()) - 1));
+              }
+            });
+            AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
+                .setTitle(R.string.choose_lang)
+                .setView(view)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                  @Override public void onClick(DialogInterface dialog, int which) {
+                    model.setAmount(getLayoutPosition(), Integer.valueOf(customAmount.getText().toString()));
+                    amount.setText(model.getCustomAmount(getLayoutPosition()));
+                    price.setText(model.getCustomPrice(getLayoutPosition()));
+                  }
+                })
+                .create();
+
+            dialog.show();
+          }
+        });
       }
     }
   }

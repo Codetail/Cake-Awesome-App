@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Custom Cake</string>
+  <string name="app_name">Sits\'weets</string>
   <string name="notifier">Choose at least one fitting to get an order</string>
   <string name="choose_fitting">Choose fittings to make an order</string>
   <string name="final_step">Final step</string>
@@ -7,6 +7,7 @@
   <string name="phone_number">Your phone number</string>
   <string name="address">Your address</string>
   <string name="deliver_date">Deliver date</string>
+  <string name="comment">Comment(optional)</string>
   <string name="order">Order</string>
   <string name="what_you_will_get">This is what you will get:</string>
   <string name="order_deliver">Order &amp; Deliver</string>
